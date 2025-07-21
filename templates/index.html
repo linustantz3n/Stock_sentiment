@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h1>📊 Reddit Stock Sentiment Analyzer</h1>
+    <p class="subtitle">Real-time sentiment analysis from Reddit discussions</p>
+</header>
+
+<form class="search-form" action="/loading" method="POST" onsubmit="">
+    <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required autofocus>
+    <button type="submit">Analyze Sentiment</button>
+</form>
+
+<div style="text-align: center; opacity: 0.7;">
+    <p>Enter a stock ticker to see what Reddit is saying about it</p>
+    <p>Data from r/stocks, r/wallstreetbets, r/investing, and r/StockMarket</p>
+</div>
+
+{% endblock %}
+
+
+
