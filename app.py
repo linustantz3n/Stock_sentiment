@@ -14,7 +14,7 @@ class TickerSentimentAnalyzer:
         self.cache = {}  # Cache results to avoid repeated API calls
         self.cache_duration = 300  # 5 minutes
         
-    def analyze_ticker(self, ticker, num_posts=30):
+    def analyze_ticker(self, ticker, num_posts=20):
         """Analyze sentiment for a specific ticker"""
         ticker = ticker.upper()
         
