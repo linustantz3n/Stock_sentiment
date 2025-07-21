@@ -14,7 +14,7 @@ class TickerSentimentAnalyzer:
         self.cache = {}  # Cache results to avoid repeated API calls
         self.cache_duration = 300  # 5 minutes
         
-    def analyze_ticker(self, ticker, num_posts=20):
+    def analyze_ticker(self, ticker, num_posts=30):
         """Analyze sentiment for a specific ticker"""
         ticker = ticker.upper()
         
@@ -28,7 +28,7 @@ class TickerSentimentAnalyzer:
         
         # Collect posts from multiple subreddits
         all_mentions = []
-        subreddits = ['stocks', 'wallstreetbets', 'investing', 'StockMarket']
+        subreddits = ['stocks', 'investing', 'StockMarket']
         
         for subreddit in subreddits:
             try:
@@ -62,10 +62,10 @@ class TickerSentimentAnalyzer:
             avg_sentiment = sum(sentiments) / len(sentiments)
             
             # Determine signal
-            if avg_sentiment > 0.3:
+            if avg_sentiment > 0.25:
                 signal = "BULLISH"
                 signal_class = "bullish"
-            elif avg_sentiment < -0.3:
+            elif avg_sentiment < -0.25:
                 signal = "BEARISH"
                 signal_class = "bearish"
             else:
