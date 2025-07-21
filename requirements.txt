@@ -1,0 +1,5 @@
+# Create a new file: requirements.txt
+praw          # Reddit API wrapper
+pandas        # Data manipulation
+vaderSentiment # Sentiment analysis
+matplotlib    # For visualizing results

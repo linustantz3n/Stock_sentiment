@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h1>📊 Sentiment Analysis for {{ data.ticker }}</h1>
+    <p class="subtitle">Updated: {{ data.timestamp }}</p>
+</header>
+
+<form class="search-form" action="/loading" method="POST">
+    <input type="text" name="ticker" placeholder="Enter another ticker" required>
+    <button type="submit">Analyze</button>
+</form>
+
+<div class="sentiment-score">
+    <h2>Overall Sentiment</h2>
+    <div class="sentiment-value {{ data.signal_class }}">
+        {{ data.signal }}
+    </div>
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value">{{ data.avg_sentiment }}</div>
+            <div class="stat-label">Sentiment Score</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ data.mention_count }}</div>
+            <div class="stat-label">Total Mentions</div>
+        </div>
+    </div>
+</div>
+
+<h2 style="margin-bottom: 20px;">Recent Mentions</h2>
+
+{% if data.mentions %}
+{% for mention in data.mentions %}
+<div
+    class="mention {% if mention.sentiment > 0.1 %}positive{% elif mention.sentiment < -0.1 %}negative{% else %}neutral{% endif %}">
+    <div class="mention-header">
+        <span class="subreddit">r/{{ mention.subreddit }}</span>
+        <span
+            class="sentiment-badge {% if mention.sentiment > 0.1 %}positive{% elif mention.sentiment < -0.1 %}negative{% else %}neutral{% endif %}">
+            {{ "%.2f"|format(mention.sentiment) }}
+        </span>
+    </div>
+    <div class="mention-title">{{ mention.title }}</div>
+    <div class="mention-excerpt">
+        {{ mention.excerpt|replace(data.ticker, '<span class="highlight">' + data.ticker + '</span>')|safe }}
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<p style="text-align: center; opacity: 0.7;">No recent mentions found for {{ data.ticker }}</p>
+{% endif %}
+{% endblock %}

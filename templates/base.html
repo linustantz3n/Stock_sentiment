@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Stock Sentiment Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0a0e27;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        input[type="text"] {
+            padding: 15px 20px;
+            font-size: 18px;
+            border: 2px solid #2a5298;
+            border-radius: 5px;
+            background-color: #1a1f3a;
+            color: white;
+            width: 300px;
+            text-transform: uppercase;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4a7cc7;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3a62a8;
+        }
+
+        .sentiment-score {
+            text-align: center;
+            padding: 30px;
+            background-color: #1a1f3a;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .sentiment-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .bullish {
+            color: #00ff88;
+        }
+
+        .bearish {
+            color: #ff4444;
+        }
+
+        .neutral {
+            color: #ffaa00;
+        }
+
+        .no-data {
+            color: #666;
+        }
+
+        .mention {
+            background-color: #1a1f3a;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .mention.positive {
+            border-color: #00ff88;
+        }
+
+        .mention.negative {
+            border-color: #ff4444;
+        }
+
+        .mention.neutral {
+            border-color: #ffaa00;
+        }
+
+        .mention-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .subreddit {
+            color: #4a7cc7;
+            font-weight: bold;
+        }
+
+        .sentiment-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .sentiment-badge.positive {
+            background-color: #00ff8833;
+            color: #00ff88;
+        }
+
+        .sentiment-badge.negative {
+            background-color: #ff444433;
+            color: #ff4444;
+        }
+
+        .sentiment-badge.neutral {
+            background-color: #ffaa0033;
+            color: #ffaa00;
+        }
+
+        .mention-title {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
+        .mention-excerpt {
+            color: #b0b0b0;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            background-color: #2a5298;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>
